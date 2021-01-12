@@ -26,7 +26,10 @@ public class Player : MonoBehaviour
     private void SwitchColour()
     {
         if (Input.GetMouseButtonDown(0))
-            ColourManager.Instance.SwitchColour();
+            ColourManager.Instance.SwitchBGColour();
+
+        if (Input.GetMouseButtonDown(1))
+            ColourManager.Instance.SwitchPlatformsColour();
     }
 
     private void Movement()
