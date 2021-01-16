@@ -30,11 +30,6 @@ public class ColourManager : MonoBehaviour
         _instance = this;
     }
 
-    private void Start()
-    {
-
-    }
-
     public void SwitchBGColour()
     {
         background.SwitchColour();
@@ -47,16 +42,7 @@ public class ColourManager : MonoBehaviour
 
     private void UpdatePlatformColours()
     {
-        /*if (!currentBGColourIsBlue) // now yellow , switch to blue
-        {
-            yellowPlatforms.SetActive(true);
-            bluePlatforms.SetActive(false);
-        }
-        else if (currentBGColourIsBlue)// now blue, switch to yellow
-        {
-            bluePlatforms.SetActive(true);
-            yellowPlatforms.SetActive(false);
-        }*/
+        
 
         if (currentBGColourIsBlue && currentPlatformsColourIsOriginal)
         {
@@ -86,19 +72,10 @@ public class ColourManager : MonoBehaviour
         SpriteRenderer[] sr1 = yellowPlatforms.GetComponentsInChildren<SpriteRenderer>();
         SpriteRenderer[] sr2 = bluePlatforms.GetComponentsInChildren<SpriteRenderer>();
 
-        //if (currentPlatformsColour) //Default colour - swap colour
-        //{
-        //    changePlatformColours(sr1, sr2, true);
-        //    UpdatePlatformColours();
-        //}
-        //else if (!currentPlatformsColour) //Swap - Default
-        //{
-        //    changePlatformColours(sr1, sr2, false);
-        //    UpdatePlatformColours();
-        //}
-
         changePlatformColours(sr1, sr2, currentPlatformsColourIsOriginal);
+
         currentPlatformsColourIsOriginal = !currentPlatformsColourIsOriginal;
+
         UpdatePlatformColours();
 
         Debug.Log(currentBGColourIsBlue + " " + currentPlatformsColourIsOriginal);
