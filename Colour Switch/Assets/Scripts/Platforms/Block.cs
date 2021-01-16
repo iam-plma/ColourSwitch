@@ -23,4 +23,9 @@ public class Block : MonoBehaviour
         }
     }
 
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
 }

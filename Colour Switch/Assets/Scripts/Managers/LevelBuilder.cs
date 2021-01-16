@@ -19,7 +19,9 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField]
     private GameObject block;
     private float yToAdd = 12.4f;
-    private int count = 0;
+    private int count = 0; // number of spawned blocks
+
+    public int amount = 1; // amount of existing block
 
     private void Awake()
     {
@@ -28,11 +30,17 @@ public class LevelBuilder : MonoBehaviour
 
     public void TriggerSpawn()
     {
-        count++;
-        float start = count * yToAdd - 3.1f; // count + distance between plats - (some number for property start)
-        Vector3 pos = new Vector3(0, start, 0);
-        GameObject tempBlock = Instantiate(block, pos, Quaternion.identity);
-        tempBlock.GetComponent<Block>().Spawn(start);
+        Debug.Log("Amount of blocks: " + amount);
+        if(amount < 2)
+        {
+            amount++;
+            count++;
+            float start = count * yToAdd - 3.1f; // count + distance between plats - (some number for property start)
+            Vector3 pos = new Vector3(0, start, 0);
+            GameObject tempBlock = Instantiate(block, pos, Quaternion.identity);
+            tempBlock.GetComponent<Block>().Spawn(start);
+        }
+        
     }
     
 
