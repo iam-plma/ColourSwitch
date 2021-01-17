@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 8494468245002682497, guid: 5d5077e48ea961046860713481420563,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8494468245002682497, guid: 5d5077e48ea961046860713481420563,
         type: 3}
@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3710b1f17eb63241a71f3f867b6b839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentColor: 0
   yellowPlatforms: {fileID: 0}
   bluePlatforms: {fileID: 0}
   yellowPlatform: {fileID: 21300000, guid: ef04dc8237e768f41854c7b63d904e5d, type: 3}
@@ -499,7 +500,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d96cdfae08c475e4c8acde396eea99b6, type: 3}
   m_Color: {r: 0.990566, g: 0.2663314, b: 0.2699841, a: 1}
   m_FlipX: 0
@@ -605,7 +606,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: b509b4c1629b4764db2a1228f12666a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -674,7 +675,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1505653492
 PrefabInstance:
@@ -860,7 +861,7 @@ PrefabInstance:
     - target: {fileID: 8494468245002682497, guid: 5d5077e48ea961046860713481420563,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8494468245002682497, guid: 5d5077e48ea961046860713481420563,
         type: 3}
@@ -929,7 +930,7 @@ PrefabInstance:
     - target: {fileID: 8494468245002682497, guid: 5d5077e48ea961046860713481420563,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8494468245002682497, guid: 5d5077e48ea961046860713481420563,
         type: 3}

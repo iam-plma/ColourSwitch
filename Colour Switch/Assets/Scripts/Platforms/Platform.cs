@@ -21,9 +21,14 @@ public class Platform : MonoBehaviour
     private Sprite yellowSprite;
     [SerializeField]
     private Sprite blueSprite;
-        
+
+    private EdgeCollider2D edgeCollider;
+    private PlatformEffector2D platformEffector;
+
     public virtual void Start()
     {
+        edgeCollider = GetComponent<EdgeCollider2D>();
+        platformEffector = GetComponent<PlatformEffector2D>();
 
         int chooseType = Random.Range(0, 2);
         if (chooseType == 0)
@@ -49,6 +54,18 @@ public class Platform : MonoBehaviour
             rb.velocity = new Vector2(speed, 0);
         else if (transform.position.x >= maxXPos)
             rb.velocity = new Vector2(-speed, 0);
+
+        if(ColourManager.Instance.currentColor == type)
+        {
+            edgeCollider.enabled = false;
+            platformEffector.enabled = false;
+        }
+        else if(ColourManager.Instance.currentColor != type)
+        {
+            edgeCollider.enabled = true;
+            platformEffector.enabled = true;
+        }
+        
     }
 
     public virtual void OnCollisionEnter2D(Collision2D collision)

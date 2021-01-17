@@ -16,6 +16,9 @@ public class ColourManager : MonoBehaviour
         }
     }
 
+    [HideInInspector]
+    public PlatformType currentColor = PlatformType.Yellow;
+
     public GameObject yellowPlatforms;
     public GameObject bluePlatforms;
     public Sprite yellowPlatform;
@@ -32,16 +35,21 @@ public class ColourManager : MonoBehaviour
 
     public void SwitchBGColour()
     {
+        if (currentColor == PlatformType.Yellow)
+            currentColor = PlatformType.Blue;
+        else if (currentColor == PlatformType.Blue)
+            currentColor = PlatformType.Yellow;
+
         background.SwitchColour();
 
-        currentBGColourIsBlue = !currentBGColourIsBlue;
-        UpdatePlatformColours();
-        Debug.Log(currentBGColourIsBlue + " " + currentPlatformsColourIsOriginal);
+        //currentBGColourIsBlue = !currentBGColourIsBlue;
+        //UpdatePlatformColours();
+        //Debug.Log(currentBGColourIsBlue + " " + currentPlatformsColourIsOriginal);
     }
 
     private void UpdatePlatformColours()
     {
-        
+        /*
         if (currentBGColourIsBlue && currentPlatformsColourIsOriginal)
         {
             yellowPlatforms.SetActive(true);
@@ -62,7 +70,7 @@ public class ColourManager : MonoBehaviour
             yellowPlatforms.SetActive(true);
             bluePlatforms.SetActive(false);
         }
-        
+        */
     }
 
     public void SwitchPlatformsColour()
