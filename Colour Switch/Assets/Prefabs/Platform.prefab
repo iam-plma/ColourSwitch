@@ -154,3 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 10
+  type: 1
+  sprite: {fileID: 0}
+  yellowSprite: {fileID: 21300000, guid: ef04dc8237e768f41854c7b63d904e5d, type: 3}
+  blueSprite: {fileID: 21300000, guid: d97244b1e54330141ae44644d363aefe, type: 3}

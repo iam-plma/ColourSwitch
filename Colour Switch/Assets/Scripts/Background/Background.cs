@@ -22,13 +22,11 @@ public class Background : MonoBehaviour
     {
         if (currentColour == false)// right now yellow, switch to blue
         {
-            Color color = new Color(0f, 255.0f, 223.0f); // blue
             sprite.sprite = blueBG;
             currentColour = true;
         }
         else if (currentColour == true)// right now blue, switch to yellow
         {
-            Color color = new Color(254.0f, 255.0f, 0f);
             sprite.sprite = yellowBG;
             currentColour = false;
         }

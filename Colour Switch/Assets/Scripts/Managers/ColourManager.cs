@@ -33,7 +33,6 @@ public class ColourManager : MonoBehaviour
     public void SwitchBGColour()
     {
         background.SwitchColour();
-        
 
         currentBGColourIsBlue = !currentBGColourIsBlue;
         UpdatePlatformColours();
@@ -43,7 +42,6 @@ public class ColourManager : MonoBehaviour
     private void UpdatePlatformColours()
     {
         
-
         if (currentBGColourIsBlue && currentPlatformsColourIsOriginal)
         {
             yellowPlatforms.SetActive(true);

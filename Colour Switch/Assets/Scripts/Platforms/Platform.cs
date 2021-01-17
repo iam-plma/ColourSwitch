@@ -16,8 +16,27 @@ public class Platform : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public PlatformType type;
+    [SerializeField]
+    private Sprite yellowSprite;
+    [SerializeField]
+    private Sprite blueSprite;
+        
     public virtual void Start()
     {
+
+        int chooseType = Random.Range(0, 2);
+        if (chooseType == 0)
+        {
+            type = PlatformType.Yellow;
+            GetComponent<SpriteRenderer>().sprite = yellowSprite;
+        }
+        else if (chooseType == 1)
+        {
+            type = PlatformType.Blue;
+            GetComponent<SpriteRenderer>().sprite = blueSprite;
+        }
+
         rb = GetComponent<Rigidbody2D>();
         speed = Random.Range(minSpeed, maxSpeed);
 
