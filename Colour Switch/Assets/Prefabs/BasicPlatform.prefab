@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4839051669673792356}
   - component: {fileID: 1315784765023106772}
   - component: {fileID: 251323643825747896}
-  - component: {fileID: 114185772855349970}
+  - component: {fileID: 114348255943289740}
   m_Layer: 8
   m_Name: BasicPlatform
   m_TagString: BasicPlatform
@@ -141,7 +141,7 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &114185772855349970
+--- !u!114 &114348255943289740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +150,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8510590248890696875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80b04c4c161fdb541bda4259bc43992e, type: 3}
+  m_Script: {fileID: 11500000, guid: 402d16193f895214c9da59e8718d4a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 10

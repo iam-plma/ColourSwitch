@@ -30,7 +30,7 @@ public class LevelBuilder : MonoBehaviour
 
     public void TriggerSpawn()
     {
-        Debug.Log("Amount of blocks: " + amount);
+        //Debug.Log("Amount of blocks: " + amount);
         if(amount < 2)
         {
             amount++;
