@@ -17,7 +17,7 @@ public class ColourManager : MonoBehaviour
     }
 
     [HideInInspector]
-    public PlatformType currentColor = PlatformType.Pink;
+    public PlatformType currentColor = PlatformType.Yellow;
 
     public GameObject yellowPlatforms;
     public GameObject bluePlatforms;
@@ -35,10 +35,10 @@ public class ColourManager : MonoBehaviour
 
     public void SwitchBGColour()
     {
-        if (currentColor == PlatformType.Pink)
+        if (currentColor == PlatformType.Yellow)
             currentColor = PlatformType.Blue;
         else if (currentColor == PlatformType.Blue)
-            currentColor = PlatformType.Pink;
+            currentColor = PlatformType.Yellow;
 
         background.SwitchColour();
 
