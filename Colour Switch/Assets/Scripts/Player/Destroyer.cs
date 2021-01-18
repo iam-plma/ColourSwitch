@@ -6,11 +6,18 @@ public class Destroyer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-
-        LevelBuilder.Instance.TriggerSpawn();
+        if(collision.gameObject.tag == "Platform")
+        {
+            LevelBuilder.Instance.TriggerSpawn();
+            Destroy(collision.gameObject);
+        }
         if (collision.gameObject.tag == "BasicPlatform")
+        {
             LevelBuilder.Instance.amount--;
-        Destroy(collision.gameObject);
+            LevelBuilder.Instance.TriggerSpawn();
+            Destroy(collision.gameObject);
+        }
+            
+        
     }
 }
