@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PlatformType
 {
-    Yellow,
+    Pink,
     Blue
 }
 

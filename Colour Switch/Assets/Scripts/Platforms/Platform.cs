@@ -33,7 +33,7 @@ public class Platform : MonoBehaviour
         int chooseType = Random.Range(0, 2);
         if (chooseType == 0)
         {
-            type = PlatformType.Yellow;
+            type = PlatformType.Pink;
             GetComponent<SpriteRenderer>().sprite = yellowSprite;
         }
         else if (chooseType == 1)
