@@ -10,10 +10,18 @@ public class Player : MonoBehaviour
     private float jumpForce = 6.0f;
     private bool resetJump = false;
 
+    [SerializeField]
+    private Sprite pinkSprite;
+    [SerializeField]
+    private Sprite blueSprite;
+
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,8 +33,23 @@ public class Player : MonoBehaviour
 
     private void SwitchColour()
     {
+        
+
         if (Input.GetMouseButtonDown(0))
+        {
             ColourManager.Instance.SwitchBGColour();
+
+            if (ColourManager.Instance.currentColor == PlatformType.Pink)
+            {
+                //GetComponent<SpriteRenderer>().sprite = pinkSprite;
+                anim.SetTrigger("ChangeToPinkColor");
+            }
+            else if (ColourManager.Instance.currentColor == PlatformType.Blue)
+            {
+                //GetComponent<SpriteRenderer>().sprite = blueSprite;
+                anim.SetTrigger("ChangeToBlueColor");
+            }
+        }
 
         if (Input.GetMouseButtonDown(1))
             ColourManager.Instance.SwitchPlatformsColour();
@@ -36,12 +59,13 @@ public class Player : MonoBehaviour
     {
         float horizontalinput = Input.GetAxisRaw("Horizontal");
 
+        /*
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             StartCoroutine(ResetJumpRoutine());
         }
-
+        */
         rb.velocity = new Vector2(horizontalinput * speedForce, rb.velocity.y);
     }
 
