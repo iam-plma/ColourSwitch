@@ -25,8 +25,11 @@ public class Platform : MonoBehaviour
     private EdgeCollider2D edgeCollider;
     private PlatformEffector2D platformEffector;
 
+    private Animator anim;
+
     public virtual void Start()
     {
+        anim = GetComponent<Animator>();
         edgeCollider = GetComponent<EdgeCollider2D>();
         platformEffector = GetComponent<PlatformEffector2D>();
 
@@ -34,11 +37,15 @@ public class Platform : MonoBehaviour
         if (chooseType == 0)
         {
             type = PlatformType.Pink;
-            GetComponent<SpriteRenderer>().sprite = yellowSprite;
+            Color color = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);
+            GetComponent<SpriteRenderer>().sprite = yellowSprite;         
         }
         else if (chooseType == 1)
         {
             type = PlatformType.Blue;
+            Color color = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);
             GetComponent<SpriteRenderer>().sprite = blueSprite;
         }
 
@@ -57,11 +64,13 @@ public class Platform : MonoBehaviour
 
         if(ColourManager.Instance.currentColor == type)
         {
+            anim.SetTrigger("TriggerFadeOut");
             edgeCollider.enabled = false;
             platformEffector.enabled = false;
         }
         else if(ColourManager.Instance.currentColor != type)
         {
+            anim.SetTrigger("TriggerFadeIn");
             edgeCollider.enabled = true;
             platformEffector.enabled = true;
         }
