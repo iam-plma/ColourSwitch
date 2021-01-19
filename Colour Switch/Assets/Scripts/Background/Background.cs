@@ -9,7 +9,7 @@ public class Background : MonoBehaviour
     [SerializeField]
     private Sprite blueBG;
     [SerializeField]
-    private Sprite yellowBG;
+    private Sprite pinkBG;
 
     private bool currentColour = false;
 
@@ -20,14 +20,14 @@ public class Background : MonoBehaviour
 
     public void SwitchColour()
     {
-        if (currentColour == false)// right now yellow, switch to blue
+        if (currentColour == false)// right now pink, switch to blue
         {
             sprite.sprite = blueBG;
             currentColour = true;
         }
-        else if (currentColour == true)// right now blue, switch to yellow
+        else if (currentColour == true)// right now blue, switch to pink
         {
-            sprite.sprite = yellowBG;
+            sprite.sprite = pinkBG;
             currentColour = false;
         }
     }

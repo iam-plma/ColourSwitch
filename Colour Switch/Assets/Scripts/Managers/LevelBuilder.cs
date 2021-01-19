@@ -28,10 +28,15 @@ public class LevelBuilder : MonoBehaviour
         _instance = this;
     }
 
+    private void Start()
+    {
+        TriggerSpawn();
+    }
+
     public void TriggerSpawn()
     {
         //Debug.Log("Amount of blocks: " + amount);
-        if(amount < 2)
+        if(amount < 3)
         {
             amount++;
             count++;

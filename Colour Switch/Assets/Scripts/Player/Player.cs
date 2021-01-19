@@ -51,8 +51,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
-            ColourManager.Instance.SwitchPlatformsColour();
+        //if (Input.GetMouseButtonDown(1))
+        //    ColourManager.Instance.SwitchPlatformsColour();
     }
 
     private void Movement()

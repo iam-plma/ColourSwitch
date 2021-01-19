@@ -75,6 +75,11 @@ public class Platform : MonoBehaviour
             platformEffector.enabled = true;
         }
         
+        if(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>().position.y -
+            GetComponent<Transform>().position.y >= 25)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public virtual void OnCollisionEnter2D(Collision2D collision)

@@ -9,6 +9,7 @@ TagManager:
   - YellowPlatforms
   - BluePlatforms
   - BasicPlatform
+  - Block
   layers:
   - Default
   - TransparentFX

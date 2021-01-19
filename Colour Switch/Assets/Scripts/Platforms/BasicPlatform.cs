@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BasicPlatform : Platform
 {
+    private bool scoreClaimed = false;
+
     public override void Start()
     {
         
@@ -12,5 +14,19 @@ public class BasicPlatform : Platform
     public override void Update()
     {
         
+    }
+
+    public override void OnCollisionEnter2D(Collision2D collision)
+    {
+        base.OnCollisionEnter2D(collision);
+
+        if(collision.gameObject.tag == "Player")
+        {
+            if (!scoreClaimed)
+            {
+                GameManager.Instance.UpdateScoreText();
+                scoreClaimed = true;
+            }
+        }
     }
 }
