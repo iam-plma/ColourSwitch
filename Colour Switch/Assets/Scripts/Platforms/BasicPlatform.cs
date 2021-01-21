@@ -21,11 +21,14 @@ public class BasicPlatform : Platform
         base.OnCollisionEnter2D(collision);
 
         if(collision.gameObject.tag == "Player")
-        {
-            if (!scoreClaimed)
+        {            
+            if (collision.relativeVelocity.y <= 0f)
             {
-                GameManager.Instance.UpdateScoreText();
-                scoreClaimed = true;
+                if (!scoreClaimed)
+                {
+                    GameManager.Instance.UpdateScoreText();
+                    scoreClaimed = true;
+                }
             }
         }
     }

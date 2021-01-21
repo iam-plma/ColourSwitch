@@ -20,9 +20,20 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public Text scoreText;
 
+    [HideInInspector]
+    public bool gameStarted = false;
+
     private void Awake()
     {
         _instance = this;
+        Time.timeScale = 0;
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
+        gameStarted = true;
+        GameObject.FindGameObjectWithTag("TapToPlay").SetActive(false);
     }
 
     public void UpdateScoreText()

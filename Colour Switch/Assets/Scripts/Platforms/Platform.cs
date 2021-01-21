@@ -95,6 +95,24 @@ public class Platform : MonoBehaviour
                     velocity.y = jumpForce;
                     rb.velocity = velocity;
                 }
+
+                if (collision.gameObject.GetComponent<Player>().collider == null)
+                {
+                    collision.gameObject.GetComponent<Player>().collider = gameObject;
+                    return;
+                }
+
+
+                if (gameObject == collision.gameObject.GetComponent<Player>().collider)
+                {
+                    collision.gameObject.GetComponent<Player>().samePlatformJumpCounter++;
+                }
+                else if (gameObject != collision.gameObject.GetComponent<Player>().collider)
+                {
+                    collision.gameObject.GetComponent<Player>().samePlatformJumpCounter = 1;
+                }
+
+                collision.gameObject.GetComponent<Player>().collider = gameObject;
             }
         }
     }

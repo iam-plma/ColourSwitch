@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
 
     private Animator anim;
 
+    [HideInInspector]
+    public GameObject collider = null;
+    public int samePlatformJumpCounter = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +31,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        SwitchColour();
+        if (GameManager.Instance.gameStarted)
+        {
+            Movement();
+            SwitchColour();
+        }
+        
     }
 
     private void SwitchColour()
     {
-        
-
         if (Input.GetMouseButtonDown(0))
         {
             ColourManager.Instance.SwitchBGColour();
