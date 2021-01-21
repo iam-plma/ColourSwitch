@@ -12,14 +12,10 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.Instance.gameStarted)
+        if(target.position.y > transform.position.y)
         {
-            if (target.position.y > transform.position.y)
-            {
-                Vector3 newPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);
-                transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref currentVelocity, cameraSpeed * Time.deltaTime);
-            }
+            Vector3 newPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);
+            transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref currentVelocity, cameraSpeed * Time.deltaTime);
         }
-        
     }
 }

@@ -23,17 +23,21 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool gameStarted = false;
 
+    public Animator tapToPlayAnim;
+    public Animator cameraAnim;
+
     private void Awake()
     {
         _instance = this;
-        Time.timeScale = 0;
     }
 
     public void StartGame()
     {
-        Time.timeScale = 1;
-        gameStarted = true;
-        GameObject.FindGameObjectWithTag("TapToPlay").SetActive(false);
+        if (gameStarted)
+            return;
+
+        cameraAnim.SetTrigger("SetPosition");
+        tapToPlayAnim.SetTrigger("SetPosition");
     }
 
     public void UpdateScoreText()

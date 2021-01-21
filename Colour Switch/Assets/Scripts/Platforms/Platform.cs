@@ -58,9 +58,16 @@ public class Platform : MonoBehaviour
     public virtual void Update()
     {
         if (transform.position.x <= minXPos)
-            rb.velocity = new Vector2(speed, 0);
+        {
+            float newSpeed = speed;
+            rb.velocity = new Vector2(newSpeed, 0);
+        }
         else if (transform.position.x >= maxXPos)
-            rb.velocity = new Vector2(-speed, 0);
+        {
+            float newSpeed = -speed;
+            rb.velocity = new Vector2(newSpeed, 0);
+        }
+        
 
         if(ColourManager.Instance.currentColor == type)
         {
@@ -95,24 +102,6 @@ public class Platform : MonoBehaviour
                     velocity.y = jumpForce;
                     rb.velocity = velocity;
                 }
-
-                if (collision.gameObject.GetComponent<Player>().collider == null)
-                {
-                    collision.gameObject.GetComponent<Player>().collider = gameObject;
-                    return;
-                }
-
-
-                if (gameObject == collision.gameObject.GetComponent<Player>().collider)
-                {
-                    collision.gameObject.GetComponent<Player>().samePlatformJumpCounter++;
-                }
-                else if (gameObject != collision.gameObject.GetComponent<Player>().collider)
-                {
-                    collision.gameObject.GetComponent<Player>().samePlatformJumpCounter = 1;
-                }
-
-                collision.gameObject.GetComponent<Player>().collider = gameObject;
             }
         }
     }

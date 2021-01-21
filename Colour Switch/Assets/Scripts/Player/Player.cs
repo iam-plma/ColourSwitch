@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
     private Sprite blueSprite;
 
     private Animator anim;
-
     [HideInInspector]
     public GameObject collider = null;
     public int samePlatformJumpCounter = 0;
@@ -31,16 +30,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameStarted)
-        {
-            Movement();
-            SwitchColour();
-        }
-        
+        Movement();
+        SwitchColour();
     }
 
     private void SwitchColour()
     {
+        
+
         if (Input.GetMouseButtonDown(0))
         {
             ColourManager.Instance.SwitchBGColour();

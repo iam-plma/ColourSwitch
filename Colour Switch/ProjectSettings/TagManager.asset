@@ -10,7 +10,6 @@ TagManager:
   - BluePlatforms
   - BasicPlatform
   - Block
-  - TapToPlay
   layers:
   - Default
   - TransparentFX
