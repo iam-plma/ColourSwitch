@@ -28,16 +28,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+
         _instance = this;
+        Time.timeScale = 0;
     }
 
     public void StartGame()
     {
-        if (gameStarted)
-            return;
-
-        cameraAnim.SetTrigger("SetPosition");
-        tapToPlayAnim.SetTrigger("SetPosition");
+        Time.timeScale = 1;
+        gameStarted = true;
+        GameObject.FindGameObjectWithTag("TapToPlay").SetActive(false);
     }
 
     public void UpdateScoreText()
