@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
     private Sprite blueSprite;
 
     private Animator anim;
+
     [HideInInspector]
     public GameObject collider = null;
     public int samePlatformJumpCounter = 0;
+
 
     // Start is called before the first frame update
     void Start()
