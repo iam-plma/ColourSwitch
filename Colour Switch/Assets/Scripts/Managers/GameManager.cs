@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,23 +21,21 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public Text scoreText;
 
-    [HideInInspector]
-    public bool gameStarted = false;
-
-    public Animator tapToPlayAnim;
-    public Animator cameraAnim;
+    [SerializeField]
+    private Animator cameraAnim;
+    [SerializeField]
+    private Animator tapToPlayAnim;
 
     private void Awake()
     {
         _instance = this;
-        Time.timeScale = 0;
     }
 
     public void StartGame()
     {
-        Time.timeScale = 1;
-        gameStarted = true;
-        GameObject.FindGameObjectWithTag("TapToPlay").SetActive(false);
+        Debug.Log("StartGame()");
+        cameraAnim.SetTrigger("SetPosition");
+        tapToPlayAnim.SetTrigger("SetPosition");
     }
 
     public void UpdateScoreText()

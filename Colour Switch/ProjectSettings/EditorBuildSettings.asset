@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/TapToPlay.unity
+    guid: 53a43451d40c37c4194df623fc010156
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
     guid: 47a50af6ad35852489976f6fff5930b5
   m_configObjects: {}

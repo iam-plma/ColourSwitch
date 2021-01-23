@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TapToPlay : MonoBehaviour
 {
-    public void Destroy()
+    public void StartGame()
     {
-        gameObject.SetActive(false);
+        SceneManager.LoadScene(1);
     }
 }

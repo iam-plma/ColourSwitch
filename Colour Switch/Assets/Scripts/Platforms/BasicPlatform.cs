@@ -24,8 +24,12 @@ public class BasicPlatform : Platform
         {
             if (!scoreClaimed)
             {
-                GameManager.Instance.UpdateScoreText();
-                scoreClaimed = true;
+                if (collision.relativeVelocity.y <= 0f)
+                {
+                    GameManager.Instance.UpdateScoreText();
+                    scoreClaimed = true;
+                }
+                    
             }
         }
     }

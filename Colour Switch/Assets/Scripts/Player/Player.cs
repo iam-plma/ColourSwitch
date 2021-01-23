@@ -32,17 +32,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameStarted)
-        {
             Movement();
             SwitchColour();
-        }
-        
+   
     }
 
     private void SwitchColour()
     {
-        
 
         if (Input.GetMouseButtonDown(0))
         {
