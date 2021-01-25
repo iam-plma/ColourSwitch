@@ -12,6 +12,9 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!GameManager.Instance.playerAlive)
+            return;
+
         if(target.position.y > transform.position.y)
         {
             Vector3 newPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);

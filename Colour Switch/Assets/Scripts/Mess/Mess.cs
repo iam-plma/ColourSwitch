@@ -18,12 +18,22 @@ public class Mess : MonoBehaviour
 
     private void Update()
     {
-        if(player.GetComponent<Player>().samePlatformJumpCounter > 2)
+        if (GameManager.Instance.playerAlive)
         {
-            rb.velocity = new Vector2(0, speed);
+            if (player.GetComponent<Player>().samePlatformJumpCounter > 2)
+            {
+                rb.velocity = new Vector2(0, speed);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, 0);
+            }
         }
-        else
+        
+        //Debug.Log(gameObject.GetComponent<Transform>().position.y + "       " + Camera.main.transform.position.y);
+        if (gameObject.GetComponent<Transform>().position.y >= Camera.main.transform.position.y)
         {
+            GameManager.Instance.instansiateDeathMenu();
             rb.velocity = new Vector2(0, 0);
         }
     }
@@ -32,14 +42,16 @@ public class Mess : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            GameManager.Instance.playerAlive = false;
+            endGame();
             Destroy(collision.gameObject);
-            playerDeath();
         }
     }
 
-    private void playerDeath()
+    private void endGame()
     {
-            
+        rb.velocity = new Vector2(0, speed*2);
+        
     }
 
 }

@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Animator tapToPlayAnim;
 
+    public bool playerAlive = true;
+
     private void Awake()
     {
         _instance = this;
@@ -44,5 +46,8 @@ public class GameManager : MonoBehaviour
         scoreText.text = "" + score;
     }
 
-
+    public void instansiateDeathMenu()
+    {
+        Debug.Log("deathMenu");
+    }
 }
