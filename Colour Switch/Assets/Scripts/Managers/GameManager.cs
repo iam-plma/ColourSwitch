@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     private Animator cameraAnim;
     [SerializeField]
     private Animator tapToPlayAnim;
+    [SerializeField]
+    private GameObject deathMenu;
 
     public bool playerAlive = true;
 
@@ -48,6 +50,11 @@ public class GameManager : MonoBehaviour
 
     public void instansiateDeathMenu()
     {
-        Debug.Log("deathMenu");
+        deathMenu.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }
