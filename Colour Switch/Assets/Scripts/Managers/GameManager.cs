@@ -27,12 +27,15 @@ public class GameManager : MonoBehaviour
     private Animator tapToPlayAnim;
     [SerializeField]
     private GameObject deathMenu;
+    [SerializeField]
+    private Text highScore;
 
     public bool playerAlive = true;
 
     private void Awake()
     {
         _instance = this;
+        highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
     }
 
     public void StartGame()
@@ -40,6 +43,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("StartGame()");
         cameraAnim.SetTrigger("SetPosition");
         tapToPlayAnim.SetTrigger("SetPosition");
+
+        
+        
     }
 
     public void UpdateScoreText()
@@ -50,11 +56,18 @@ public class GameManager : MonoBehaviour
 
     public void instansiateDeathMenu()
     {
-        deathMenu.SetActive(true);
+        if (PlayerPrefs.GetInt("high_score") < score)
+        {
+            PlayerPrefs.SetInt("high_score", score);
+        }
+        deathMenu.SetActive(true);   
+        deathMenu.GetComponentInChildren<Text>().text = "Score: " + score;
+        highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
     }
 
     public void Restart()
     {
         SceneManager.LoadScene(0);
+
     }
 }
