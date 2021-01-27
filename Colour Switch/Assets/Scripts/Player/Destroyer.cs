@@ -13,7 +13,7 @@ public class Destroyer : MonoBehaviour
         }
         if (collision.gameObject.tag == "BasicPlatform")
         {
-            Debug.Log("BasicPlatform destroyed");
+            //Debug.Log("BasicPlatform destroyed");
             LevelBuilder.Instance.amount--;
             LevelBuilder.Instance.TriggerSpawn();
             Destroy(collision.gameObject);

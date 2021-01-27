@@ -9,11 +9,14 @@ public class Mess : MonoBehaviour
 
     private GameObject player;
 
+    private bool gameFinished = false;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        gameFinished = false;
     }
 
     private void Update()
@@ -29,10 +32,14 @@ public class Mess : MonoBehaviour
                 rb.velocity = new Vector2(0, 0);
             }
         }
-        
+
+        if (gameFinished)
+            return;
+
         //Debug.Log(gameObject.GetComponent<Transform>().position.y + "       " + Camera.main.transform.position.y);
         if (gameObject.GetComponent<Transform>().position.y >= Camera.main.transform.position.y)
         {
+            gameFinished = true;
             GameManager.Instance.instansiateDeathMenu();
             rb.velocity = new Vector2(0, 0);
         }
