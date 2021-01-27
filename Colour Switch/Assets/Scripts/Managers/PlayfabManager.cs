@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using System;
 
 public class PlayfabManager : MonoBehaviour
 {
@@ -18,9 +19,16 @@ public class PlayfabManager : MonoBehaviour
         }
     }
 
+    [HideInInspector]
+    public static List<PlayerLeaderboardEntry> leaderboard;
+    
+    
+
+
     private void Awake()
     {
         _instance = this;
+        
     }
 
     // Start is called before the first frame update
@@ -68,5 +76,23 @@ public class PlayfabManager : MonoBehaviour
     private void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result) 
     {
         Debug.Log("Successfull Leaderboard sent");
+    }
+
+    public void GetLeaderboard()
+    {
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = "HighScore",
+            StartPosition = 0,
+            MaxResultsCount = 10
+        };
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
+    }
+
+    private void OnLeaderboardGet(GetLeaderboardResult result)
+    {
+        leaderboard = result.Leaderboard;
+        //LeaderboardManager.Instance.buildLeaderboard(leaderboard);
+        Debug.Log("assigning leaderboard..." + leaderboard.Count);
     }
 }
