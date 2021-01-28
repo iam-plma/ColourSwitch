@@ -23,7 +23,13 @@ public class LeaderboardManager : MonoBehaviour
     [SerializeField]
     private Transform rowsParent;
 
-    List<PlayerLeaderboardEntry> leaderboard;
+    public GameObject nameWindow;
+    public GameObject leaderboardWindow;
+
+    public InputField inputField;
+
+    [HideInInspector]
+    public string _name = null;
 
     private void Awake()
     {
@@ -32,14 +38,23 @@ public class LeaderboardManager : MonoBehaviour
 
     private void Start()
     {
-        leaderboard = PlayfabManager.leaderboard;
-        buildLeaderboard();
+        
+        _name = PlayfabManager.playerName;
+        //Debug.Log("Leaderboard length: " + leaderboard.Count + " Player name: " + _name);
+
+        if (_name == null)
+            nameWindow.SetActive(true);
+        else
+        {
+            leaderboardWindow.SetActive(true);
+            PlayfabManager.Instance.GetLeaderboard();
+        }
+            
     }
 
-    public void buildLeaderboard()
+    public void buildLeaderboard(List<PlayerLeaderboardEntry> leaderboard)
     {
         Debug.Log(leaderboard.Count);
-
         foreach (Transform item in rowsParent)
             Destroy(item.gameObject);
 
@@ -48,9 +63,21 @@ public class LeaderboardManager : MonoBehaviour
             GameObject newGO = Instantiate(row, rowsParent);
             Text[] texts = newGO.GetComponentsInChildren<Text>();
             texts[0].text = (item.Position+1).ToString();
-            texts[1].text = item.PlayFabId;
+            texts[1].text = item.DisplayName;
             texts[2].text = item.StatValue.ToString();
-
         }
     }
+
+    public void Submit()
+    {
+        PlayfabManager.Instance.SubmitNameButton(_name);
+    }
+
+    public void SetName()
+    {
+        _name = inputField.text;
+        Debug.Log(_name);
+    }
+
+    
 }

@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
         deathMenu.GetComponentInChildren<Text>().text = "Score: " + score;
         highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
         PlayfabManager.Instance.SendLeaderboard(PlayerPrefs.GetInt("high_score", 0));
-        PlayfabManager.Instance.GetLeaderboard();
     }
 
     public void Restart()

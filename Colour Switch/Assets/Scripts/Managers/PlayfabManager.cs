@@ -5,6 +5,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System;
 
+
 public class PlayfabManager : MonoBehaviour
 {
     private static PlayfabManager _instance;
@@ -21,19 +22,19 @@ public class PlayfabManager : MonoBehaviour
 
     [HideInInspector]
     public static List<PlayerLeaderboardEntry> leaderboard;
-    
-    
 
+    public static string playerName;
 
     private void Awake()
     {
         _instance = this;
-        
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        
         Login();
     }
 
@@ -41,7 +42,11 @@ public class PlayfabManager : MonoBehaviour
     {
         var request = new LoginWithCustomIDRequest {
             CustomId = SystemInfo.deviceUniqueIdentifier,
-            CreateAccount = true
+            CreateAccount = true,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+            {
+                GetPlayerProfile = true
+            }
         };
         PlayFabClientAPI.LoginWithCustomID(request, OnSucces, OnError);
     }
@@ -49,6 +54,9 @@ public class PlayfabManager : MonoBehaviour
     private void OnSucces(LoginResult result)
     {
         Debug.Log("Successful login\\account create!");
+
+        if (result.InfoResultPayload.PlayerProfile != null)
+            playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
     }
 
     private void OnError(PlayFabError error)
@@ -92,7 +100,25 @@ public class PlayfabManager : MonoBehaviour
     private void OnLeaderboardGet(GetLeaderboardResult result)
     {
         leaderboard = result.Leaderboard;
-        //LeaderboardManager.Instance.buildLeaderboard(leaderboard);
+        LeaderboardManager.Instance.buildLeaderboard(leaderboard);
         Debug.Log("assigning leaderboard..." + leaderboard.Count);
+    }
+
+    public void SubmitNameButton(string input)
+    {
+        var request = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = input,
+        };
+        
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+    }
+
+    private void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+    {
+        GetLeaderboard();
+        Debug.Log("Updated display name!");
+        LeaderboardManager.Instance.leaderboardWindow.SetActive(true);
+        LeaderboardManager.Instance.nameWindow.SetActive(false);
     }
 }
