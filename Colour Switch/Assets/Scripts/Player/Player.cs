@@ -6,9 +6,8 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    private float speedForce = 4.5f;
-    private float jumpForce = 6.0f;
-    private bool resetJump = false;
+    //private float speedForce = 4.5f;
+    private float speedForce = 15.0f;
 
     [SerializeField]
     private Sprite pinkSprite;
@@ -18,18 +17,15 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     [HideInInspector]
-    public GameObject collider = null;
+    public GameObject colliderObj = null;
     public int samePlatformJumpCounter = 0;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
             Movement();
@@ -46,56 +42,41 @@ public class Player : MonoBehaviour
 
             if (ColourManager.Instance.currentColor == PlatformType.Pink)
             {
-                //GetComponent<SpriteRenderer>().sprite = pinkSprite;
                 anim.SetTrigger("ChangeToPinkColor");
             }
             else if (ColourManager.Instance.currentColor == PlatformType.Blue)
             {
-                //GetComponent<SpriteRenderer>().sprite = blueSprite;
                 anim.SetTrigger("ChangeToBlueColor");
             }
         }
-
-        //if (Input.GetMouseButtonDown(1))
-        //    ColourManager.Instance.SwitchPlatformsColour();
     }
 
     private void Movement()
     {
-        float horizontalinput = Input.GetAxisRaw("Horizontal");
+        //float horizontalinput = Input.GetAxisRaw("Horizontal");
+       // rb.velocity = new Vector2(horizontalinput * speedForce, rb.velocity.y);
 
-        /*
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            StartCoroutine(ResetJumpRoutine());
-        }
-        */
-        rb.velocity = new Vector2(horizontalinput * speedForce, rb.velocity.y);
+        Vector3 accVec = GetAccelerometerValue();
+        rb.velocity = new Vector2(accVec.x  * speedForce, rb.velocity.y);
+        
     }
 
-    private bool IsGrounded()
+    private Vector3 GetAccelerometerValue()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.8f, 1 << 8);
-        Debug.DrawRay(transform.position, Vector2.down, Color.green);
+        Vector3 acc = Vector3.zero;
+        float period = 0.0f;
 
-        if (hit.collider != null)
+        foreach (AccelerationEvent evnt in Input.accelerationEvents)
         {
-            if (!resetJump)
-            {
-                return true;
-            }
+            acc += evnt.acceleration * evnt.deltaTime;
+            period += evnt.deltaTime;
         }
-
-        return false;
+        if (period > 0)
+        {
+            acc *= 1.0f / period;
+        }
+        return acc;
     }
 
-    IEnumerator ResetJumpRoutine()
-    {
-        resetJump = true;
-        yield return new WaitForSeconds(0.1f);
-        resetJump = false;
-    }
 
-    
 }

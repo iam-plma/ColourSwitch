@@ -103,23 +103,23 @@ public class Platform : MonoBehaviour
                     rb.velocity = velocity;
                 }
 
-                if (collision.gameObject.GetComponent<Player>().collider == null)
+                if (collision.gameObject.GetComponent<Player>().colliderObj == null)
                 {
-                    collision.gameObject.GetComponent<Player>().collider = gameObject;
+                    collision.gameObject.GetComponent<Player>().colliderObj = gameObject;
                     return;
                 }
 
 
-                if (gameObject == collision.gameObject.GetComponent<Player>().collider)
+                if (gameObject == collision.gameObject.GetComponent<Player>().colliderObj)
                 {
                     collision.gameObject.GetComponent<Player>().samePlatformJumpCounter++;
                 }
-                else if (gameObject != collision.gameObject.GetComponent<Player>().collider)
+                else if (gameObject != collision.gameObject.GetComponent<Player>().colliderObj)
                 {
                     collision.gameObject.GetComponent<Player>().samePlatformJumpCounter = 1;
                 }
 
-                collision.gameObject.GetComponent<Player>().collider = gameObject;
+                collision.gameObject.GetComponent<Player>().colliderObj = gameObject;
             }
 
             
