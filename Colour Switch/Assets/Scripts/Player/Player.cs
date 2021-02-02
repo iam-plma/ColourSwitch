@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            AudioManager.Instance.Play("Switch");
             ColourManager.Instance.SwitchBGColour();
 
             if (ColourManager.Instance.currentColor == PlatformType.Pink)
@@ -53,11 +54,11 @@ public class Player : MonoBehaviour
 
     private void Movement()
     {
-        //float horizontalinput = Input.GetAxisRaw("Horizontal");
-       // rb.velocity = new Vector2(horizontalinput * speedForce, rb.velocity.y);
+        float horizontalinput = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(horizontalinput * speedForce/2, rb.velocity.y);
 
-        Vector3 accVec = GetAccelerometerValue();
-        rb.velocity = new Vector2(accVec.x  * speedForce, rb.velocity.y);
+        //Vector3 accVec = GetAccelerometerValue();
+        //rb.velocity = new Vector2(accVec.x  * speedForce, rb.velocity.y);
         
     }
 

@@ -106,6 +106,8 @@ public class PlayfabManager : MonoBehaviour
 
     public void SubmitNameButton(string input)
     {
+        AudioManager.Instance.Play("Switch");
+
         var request = new UpdateUserTitleDisplayNameRequest
         {
             DisplayName = input,

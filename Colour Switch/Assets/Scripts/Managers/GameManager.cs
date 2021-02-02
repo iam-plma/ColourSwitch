@@ -34,22 +34,26 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        _instance = this;
+        if (_instance == null)
+            _instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        if(highScore != null)
+        if (highScore != null)
             highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
     }
-
+    
     public void StartGame()
     {
         Debug.Log("StartGame()");
+        AudioManager.Instance.Play("Switch");
         cameraAnim.SetTrigger("SetPosition");
         tapToPlayAnim.SetTrigger("SetPosition");
-
-        
-        
     }
-
+     
     public void UpdateScoreText()
     {
         score++;
@@ -62,7 +66,9 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("high_score", score);
         }
-        deathMenu.SetActive(true);   
+        AudioManager.Instance.Stop("MainTheme");
+        AudioManager.Instance.Play("SecondaryTheme");
+        deathMenu.SetActive(true);  
         deathMenu.GetComponentInChildren<Text>().text = "Score: " + score;
         highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
         PlayfabManager.Instance.SendLeaderboard(PlayerPrefs.GetInt("high_score", 0));
@@ -71,11 +77,15 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(0);
+        AudioManager.Instance.Play("MainTheme");
+        AudioManager.Instance.Play("Switch");
+        AudioManager.Instance.Stop("SecondaryTheme");
     }
 
     public void LoadLeaderboard()
     {
         
         SceneManager.LoadScene(2);
+        AudioManager.Instance.Play("Switch");
     }
 }
