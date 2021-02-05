@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        DontDestroyOnLoad(gameObject);
+
         if (highScore != null)
             highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
     }
