@@ -24,8 +24,8 @@ public class Platform : MonoBehaviour
 
     private EdgeCollider2D edgeCollider;
     private PlatformEffector2D platformEffector;
-
-    private Animator anim;
+    [HideInInspector]
+    public Animator anim;
 
     public virtual void Start()
     {
@@ -57,6 +57,9 @@ public class Platform : MonoBehaviour
 
     public virtual void Update()
     {
+        if (!GameManager.Instance.playerAlive)
+            return;
+
         if (transform.position.x <= minXPos)
         {
             float newSpeed = speed;

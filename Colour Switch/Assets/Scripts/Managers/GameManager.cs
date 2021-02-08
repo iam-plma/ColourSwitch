@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Animator tapToPlayAnim;
     [SerializeField]
+    private Animator highScoreAnim;
+    [SerializeField]
     private GameObject deathMenu;
     [SerializeField]
     private Text highScore;
@@ -36,13 +38,7 @@ public class GameManager : MonoBehaviour
     {
         if (_instance == null)
             _instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
+        
 
         if (highScore != null)
             highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
@@ -53,7 +49,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("StartGame()");
         AudioManager.Instance.Play("Switch");
         cameraAnim.SetTrigger("SetPosition");
+        highScoreAnim.SetTrigger("SetPosition");
         tapToPlayAnim.SetTrigger("SetPosition");
+        
     }
      
     public void UpdateScoreText()
@@ -74,6 +72,11 @@ public class GameManager : MonoBehaviour
         deathMenu.GetComponentInChildren<Text>().text = "Score: " + score;
         highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
         PlayfabManager.Instance.SendLeaderboard(PlayerPrefs.GetInt("high_score", 0));
+
+        foreach(GameObject p in GameObject.FindGameObjectsWithTag("Platform"))
+        {
+            p.GetComponent<Animator>().SetTrigger("TriggerFadeOut");
+        }
     }
 
     public void Restart()

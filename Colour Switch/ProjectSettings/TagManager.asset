@@ -10,6 +10,9 @@ TagManager:
   - BluePlatforms
   - BasicPlatform
   - Block
+  - TapToPlay
+  - DeathMenu
+  - HighScore
   layers:
   - Default
   - TransparentFX
