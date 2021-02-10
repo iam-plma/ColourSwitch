@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         AudioManager.Instance.Play("MainTheme");
         AudioManager.Instance.Play("Switch");
         AudioManager.Instance.Stop("SecondaryTheme");
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     public void LoadLeaderboard()
     {
         
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
         AudioManager.Instance.Play("Switch");
     }
 }
