@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     private GameObject deathMenu;
     [SerializeField]
     private Text highScore;
+    [SerializeField]
+    private GameObject ToLeaderboardTransition;
 
     public bool playerAlive = true;
 
@@ -89,8 +91,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadLeaderboard()
     {
-        
-        SceneManager.LoadScene(3);
+
+        ToLeaderboardTransition.SetActive(true);
         AudioManager.Instance.Play("Switch");
+        StartCoroutine(WaitOneSec());
+    }
+
+    private IEnumerator WaitOneSec()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(3);
     }
 }
