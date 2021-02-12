@@ -5,16 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class Intro : MonoBehaviour
 {
-    public float time = 4.1f;
+    [SerializeField]
+    private float time = 4.3f;
 
     void Start()
     {
-        StartCoroutine(Wait());
+        StartCoroutine(WaitToStart());
+        StartCoroutine(WaitToSwitchOn());
     }
 
-    private IEnumerator Wait()
+    private IEnumerator WaitToStart()
     {
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene(1);
     }
+
+    private IEnumerator WaitToSwitchOn()
+    {
+        yield return new WaitForSeconds(2.3f);
+        AudioManager.Instance.Play("IntroSwitch");
+    }
+
 }
