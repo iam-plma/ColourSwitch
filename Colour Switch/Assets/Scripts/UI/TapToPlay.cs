@@ -11,6 +11,7 @@ public class TapToPlay : MonoBehaviour
     }
     public void StartGame()
     {
+        ScoreManager.Instance.score = 0;
         SceneManager.LoadScene(2);
     }
 }

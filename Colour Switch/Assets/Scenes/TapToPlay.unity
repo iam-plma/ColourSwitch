@@ -220,13 +220,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5358978406e2af343b172689c7b8154d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   scoreText: {fileID: 0}
   cameraAnim: {fileID: 1096196799}
   tapToPlayAnim: {fileID: 14679945}
   highScoreAnim: {fileID: 1646015536}
   deathMenu: {fileID: 0}
   highScore: {fileID: 1386661260}
+  ToLeaderboardTransition: {fileID: 0}
   playerAlive: 1
 --- !u!4 &73736726
 Transform:

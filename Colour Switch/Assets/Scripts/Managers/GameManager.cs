@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int score = 0;
     public Text scoreText;
 
     [SerializeField]
@@ -58,20 +57,20 @@ public class GameManager : MonoBehaviour
      
     public void UpdateScoreText()
     {
-        score++;
-        scoreText.text = "" + score;
+        ScoreManager.Instance.AddScore();
+        scoreText.text = "" + ScoreManager.Instance.score;
     }
 
     public void instansiateDeathMenu()
     {
-        if (PlayerPrefs.GetInt("high_score") < score)
+        if (PlayerPrefs.GetInt("high_score") < ScoreManager.Instance.score)
         {
-            PlayerPrefs.SetInt("high_score", score);
+            PlayerPrefs.SetInt("high_score", ScoreManager.Instance.score);
         }
         AudioManager.Instance.Stop("MainTheme");
         AudioManager.Instance.Play("SecondaryTheme");
         deathMenu.SetActive(true);  
-        deathMenu.GetComponentInChildren<Text>().text = "Score: " + score;
+        deathMenu.GetComponentInChildren<Text>().text = "Score: " + ScoreManager.Instance.score;
         highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
         PlayfabManager.Instance.SendLeaderboard(PlayerPrefs.GetInt("high_score", 0));
 
@@ -91,15 +90,25 @@ public class GameManager : MonoBehaviour
 
     public void LoadLeaderboard()
     {
-
         ToLeaderboardTransition.SetActive(true);
         AudioManager.Instance.Play("Switch");
-        StartCoroutine(WaitOneSec());
+        StartCoroutine(WaitOneSec(3));
     }
 
-    private IEnumerator WaitOneSec()
+    private IEnumerator WaitOneSec(int scene)
     {
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(3);
+        if(scene == 1)
+            AudioManager.Instance.Play("MainTheme");
+        SceneManager.LoadScene(scene);
+    }
+
+    public void Reborn()
+    {
+        AudioManager.Instance.Stop("SecondaryTheme");
+        AudioManager.Instance.Play("Switch");
+        GameObject.FindGameObjectWithTag("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
+        ToLeaderboardTransition.SetActive(true);
+        StartCoroutine(WaitOneSec(2));
     }
 }
