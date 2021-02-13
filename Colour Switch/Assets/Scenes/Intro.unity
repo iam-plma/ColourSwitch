@@ -363,10 +363,10 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     source: {fileID: 0}
-  - soundName: Platform
-    clip: {fileID: 8300000, guid: 16376cf7fc1556d4cbb6707188f7a063, type: 3}
+  - soundName: BasicPlatform
+    clip: {fileID: 8300000, guid: 0d9c64d68e731404f94df926e923802d, type: 3}
     volume: 0.5
-    pitch: 1
+    pitch: 0.8
     loop: 0
     randomVolume: 0.1
     randomPitch: 0.1

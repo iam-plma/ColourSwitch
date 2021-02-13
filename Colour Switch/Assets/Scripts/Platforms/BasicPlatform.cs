@@ -28,6 +28,7 @@ public class BasicPlatform : Platform
                 {
                     GameManager.Instance.UpdateScoreText();
                     scoreClaimed = true;
+                    AudioManager.Instance.Play("BasicPlatform");
                 }
                     
             }
