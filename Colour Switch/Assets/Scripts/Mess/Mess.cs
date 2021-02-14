@@ -49,9 +49,10 @@ public class Mess : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            AudioManager.Instance.Stop("MainTheme");
-            AudioManager.Instance.Play("DeathVoice");
-            AudioManager.Instance.Play("DeathTheme");
+            //AudioManager.Instance.Stop("MainTheme");
+            //AudioManager.Instance.Play("DeathVoice");
+            //AudioManager.Instance.Play("DeathTheme");
+            AudioManager.Instance.sounds[0].source.pitch = 0.85f;
             GameManager.Instance.playerAlive = false;
             endGame();
             Destroy(collision.gameObject);

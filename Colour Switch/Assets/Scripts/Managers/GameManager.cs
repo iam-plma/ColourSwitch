@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("high_score", ScoreManager.Instance.score);
         }
-        //AudioManager.Instance.Stop("MainTheme");
+        AudioManager.Instance.Stop("MainTheme");
         AudioManager.Instance.Play("SecondaryTheme");
         deathMenu.SetActive(true);  
         deathMenu.GetComponentInChildren<Text>().text = "Score: " + ScoreManager.Instance.score;
@@ -98,9 +98,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitOneSec(int scene)
     {
         yield return new WaitForSeconds(1);
-        if(scene == 1)
-            AudioManager.Instance.Play("MainTheme");
+        
         SceneManager.LoadScene(scene);
+        if (scene == 2)
+            AudioManager.Instance.Play("MainTheme");
     }
 
     public void Reborn()
