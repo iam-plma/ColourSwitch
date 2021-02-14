@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private GameObject ToLeaderboardTransition;
 
     public bool playerAlive = true;
+    
 
     private void Awake()
     {
@@ -90,13 +91,14 @@ public class GameManager : MonoBehaviour
 
     public void LoadLeaderboard()
     {
-        ToLeaderboardTransition.SetActive(true);
+        
         AudioManager.Instance.Play("Switch");
         StartCoroutine(WaitOneSec(3));
     }
 
-    private IEnumerator WaitOneSec(int scene)
+    public IEnumerator WaitOneSec(int scene)
     {
+        ToLeaderboardTransition.SetActive(true);
         yield return new WaitForSeconds(1);
         
         SceneManager.LoadScene(scene);
@@ -106,10 +108,19 @@ public class GameManager : MonoBehaviour
 
     public void Reborn()
     {
-        AudioManager.Instance.Stop("SecondaryTheme");
+        if (ScoreManager.Instance.adWatched)
+            return;
+
+        
+        
         AudioManager.Instance.Play("Switch");
         GameObject.FindGameObjectWithTag("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
-        ToLeaderboardTransition.SetActive(true);
-        StartCoroutine(WaitOneSec(2));
+
+        if (!ScoreManager.Instance.adWatched)
+            return;
+
+        AudioManager.Instance.Stop("SecondaryTheme");
+       
+        //StartCoroutine(WaitOneSec(2));
     }
 }

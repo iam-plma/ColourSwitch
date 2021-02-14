@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     public int score;
-
+    public bool adWatched = false;
     private void Awake()
     {
         if (_instance == null)
@@ -41,5 +41,6 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         score = 0;
+        adWatched = false;
     }
 }

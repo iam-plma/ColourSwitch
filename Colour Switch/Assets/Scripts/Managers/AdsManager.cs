@@ -5,6 +5,7 @@ using UnityEngine.Advertisements;
 
 public class AdsManager : MonoBehaviour
 {
+
     public void ShowRewardedAd()
     {
         
@@ -27,6 +28,8 @@ public class AdsManager : MonoBehaviour
         {
             case ShowResult.Finished:
                 Debug.Log("Reborn");
+                ScoreManager.Instance.adWatched = true;
+                StartCoroutine(GameManager.Instance.WaitOneSec(2));
                 break;
             case ShowResult.Skipped:
                 Debug.Log("No reward got! Video was skipped!");
