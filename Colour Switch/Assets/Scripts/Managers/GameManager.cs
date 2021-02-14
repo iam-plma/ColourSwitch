@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("high_score", ScoreManager.Instance.score);
         }
-        AudioManager.Instance.Stop("MainTheme");
+        //AudioManager.Instance.Stop("MainTheme");
         AudioManager.Instance.Play("SecondaryTheme");
         deathMenu.SetActive(true);  
         deathMenu.GetComponentInChildren<Text>().text = "Score: " + ScoreManager.Instance.score;
