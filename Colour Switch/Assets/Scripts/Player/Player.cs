@@ -55,12 +55,12 @@ public class Player : MonoBehaviour
     private void Movement()
     {
         //for pc
-        float horizontalinput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(horizontalinput * speedForce/2, rb.velocity.y);
+        ///float horizontalinput = Input.GetAxisRaw("Horizontal");
+        //rb.velocity = new Vector2(horizontalinput * speedForce/2, rb.velocity.y);
 
         //for mobile
-        //Vector3 accVec = GetAccelerometerValue();
-        //rb.velocity = new Vector2(accVec.x  * speedForce, rb.velocity.y);
+        Vector3 accVec = GetAccelerometerValue();
+        rb.velocity = new Vector2(accVec.x  * speedForce, rb.velocity.y);
         
     }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class AudioManager : MonoBehaviour
     }
 
     public Sound[] sounds;
+    public bool mainMusicPlaying = true;
+    public bool secondaryMusicPlaying = true;
 
     private void Awake()
     {
@@ -43,11 +46,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void Play(string soundName)
     {
         Sound s = Array.Find(sounds, sound => sound.soundName == soundName);
@@ -55,7 +53,7 @@ public class AudioManager : MonoBehaviour
         if (s == null)
             return;
 
-        Debug.Log("playing" + soundName);
+        //Debug.Log("playing" + soundName);
         s.Play();
     }
 
@@ -69,4 +67,60 @@ public class AudioManager : MonoBehaviour
         Debug.Log("stop playing" + soundName);
         s.StopPlaying();
     }
+
+    public Sound GetSound(string soundName)
+    {
+        Sound s = Array.Find(sounds, sound => sound.soundName == soundName);
+     
+        return s;        
+    }
+
+    public void ReduceVolume(string soundName)
+    {
+        Sound s = Array.Find(sounds, sound => sound.soundName == soundName);
+        s.volume = 0;
+    }
+    public void StopMusic()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (mainMusicPlaying)
+            {
+                Stop("MainTheme");
+                mainMusicPlaying = false;
+            }else if (!mainMusicPlaying)
+            {
+                Play("MainTheme");
+                mainMusicPlaying = true;
+            }
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (mainMusicPlaying)
+            {
+                Stop("MainTheme");
+                mainMusicPlaying = false;
+            }
+            else if (!mainMusicPlaying)
+            {
+                Play("MainTheme");
+                mainMusicPlaying = true;
+            }
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            if (secondaryMusicPlaying)
+            {
+                Stop("SecondaryTheme");
+                secondaryMusicPlaying = false;
+            }
+            else if (!secondaryMusicPlaying)
+            {
+                Play("SecondaryTheme");
+                secondaryMusicPlaying = true;
+            }
+        }
+    }
+
+    
 }
