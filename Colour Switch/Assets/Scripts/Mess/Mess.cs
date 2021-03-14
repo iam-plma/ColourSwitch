@@ -1,66 +1,70 @@
 ﻿using UnityEngine;
+using Managers;
+using PlayerScripts;
 
-public class Mess : MonoBehaviour
+namespace Mess
 {
-    private Rigidbody2D rb;
-    private float speed = 1.5f;
-
-    private GameObject player;
-
-    private bool gameFinished = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Mess : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        gameFinished = false;
-    }
+        private Rigidbody2D rb;
+        private float speed = 1.5f;
 
-    private void Update()
-    {
-        if (GameManager.Instance.playerAlive)
+        private GameObject player;
+
+        private bool gameFinished = false;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            if (player.GetComponent<Player>().samePlatformJumpCounter > 2)
+            rb = GetComponent<Rigidbody2D>();
+            player = GameObject.FindGameObjectWithTag("Player");
+            gameFinished = false;
+        }
+
+        private void Update()
+        {
+            if (GameManager.Instance.playerAlive)
             {
-                rb.velocity = new Vector2(0, speed);
+                if (player.GetComponent<Player>().samePlatformJumpCounter > 2)
+                {
+                    rb.velocity = new Vector2(0, speed);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(0, 0);
+                }
             }
-            else
+
+            if (gameFinished)
+                return;
+
+            //Debug.Log(gameObject.GetComponent<Transform>().position.y + "       " + Camera.main.transform.position.y);
+            if (gameObject.GetComponent<Transform>().position.y >= Camera.main.transform.position.y)
             {
+                gameFinished = true;
+                GameManager.Instance.instansiateDeathMenu();
                 rb.velocity = new Vector2(0, 0);
             }
         }
 
-        if (gameFinished)
-            return;
-
-        //Debug.Log(gameObject.GetComponent<Transform>().position.y + "       " + Camera.main.transform.position.y);
-        if (gameObject.GetComponent<Transform>().position.y >= Camera.main.transform.position.y)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            gameFinished = true;
-            GameManager.Instance.instansiateDeathMenu();
-            rb.velocity = new Vector2(0, 0);
+            if (collision.gameObject.tag == "Player")
+            {
+                //AudioManager.Instance.Stop("MainTheme");
+                //AudioManager.Instance.Play("DeathVoice");
+                //AudioManager.Instance.Play("DeathTheme");
+                AudioManager.Instance.sounds[0].source.pitch = 0.85f;
+                GameManager.Instance.playerAlive = false;
+                endGame();
+                Destroy(collision.gameObject);
+            }
+        }
+
+        private void endGame()
+        {
+            rb.velocity = new Vector2(0, speed * 2);
+
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            //AudioManager.Instance.Stop("MainTheme");
-            //AudioManager.Instance.Play("DeathVoice");
-            //AudioManager.Instance.Play("DeathTheme");
-            AudioManager.Instance.sounds[0].source.pitch = 0.85f;
-            GameManager.Instance.playerAlive = false;
-            endGame();
-            Destroy(collision.gameObject);
-        }
-    }
-
-    private void endGame()
-    {
-        rb.velocity = new Vector2(0, speed*2);
-        
-    }
-
 }

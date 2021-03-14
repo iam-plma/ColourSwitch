@@ -1,44 +1,47 @@
 ﻿using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+namespace Managers
 {
-    private static ScoreManager _instance;
-    public static ScoreManager Instance
+    public class ScoreManager : MonoBehaviour
     {
-        get
+        private static ScoreManager _instance;
+        public static ScoreManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    Debug.Log("ScoreManager is null");
+
+                return _instance;
+            }
+        }
+
+        public int score;
+        public bool adWatched = false;
+        private void Awake()
         {
             if (_instance == null)
-                Debug.Log("ScoreManager is null");
+                _instance = this;
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-            return _instance;
+            DontDestroyOnLoad(gameObject);
+
+            score = 0;
         }
-    }
 
-    public int score;
-    public bool adWatched = false;
-    private void Awake()
-    {
-        if (_instance == null)
-            _instance = this;
-        else
+        public void AddScore()
         {
-            Destroy(gameObject);
-            return;
+            score++;
         }
 
-        DontDestroyOnLoad(gameObject);
-
-        score = 0;
-    }
-   
-    public void AddScore()
-    {
-        score++;
-    }
-
-    public void ResetScore()
-    {
-        score = 0;
-        adWatched = false;
+        public void ResetScore()
+        {
+            score = 0;
+            adWatched = false;
+        }
     }
 }

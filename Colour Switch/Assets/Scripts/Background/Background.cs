@@ -1,32 +1,35 @@
 ﻿using UnityEngine;
 
-public class Background : MonoBehaviour
+namespace BackgroundScripts
 {
-    private SpriteRenderer sprite;
-
-    [SerializeField]
-    private Sprite blueBG;
-    [SerializeField]
-    private Sprite pinkBG;
-
-    private bool currentColour = false;
-
-    void Start()
+    public class Background : MonoBehaviour
     {
-        sprite = GetComponent<SpriteRenderer>(); 
-    }
+        private SpriteRenderer sprite;
 
-    public void SwitchColour()
-    {
-        if (currentColour == false)// right now pink, switch to blue
+        [SerializeField]
+        private Sprite blueBG;
+        [SerializeField]
+        private Sprite pinkBG;
+
+        private bool currentColour = false;
+
+        void Start()
         {
-            sprite.sprite = blueBG;
-            currentColour = true;
+            sprite = GetComponent<SpriteRenderer>();
         }
-        else if (currentColour == true)// right now blue, switch to pink
+
+        public void SwitchColour()
         {
-            sprite.sprite = pinkBG;
-            currentColour = false;
+            if (currentColour == false)// right now pink, switch to blue
+            {
+                sprite.sprite = blueBG;
+                currentColour = true;
+            }
+            else if (currentColour == true)// right now blue, switch to pink
+            {
+                sprite.sprite = pinkBG;
+                currentColour = false;
+            }
         }
     }
 }

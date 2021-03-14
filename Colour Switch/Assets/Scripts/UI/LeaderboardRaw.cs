@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-public class LeaderboardRaw : MonoBehaviour
+namespace UI
 {
-    void Update()
+    public class LeaderboardRaw : MonoBehaviour
     {
-        if (gameObject.transform.position.y < -2046)
-            Destroy(gameObject);
+        void Update()
+        {
+            if (gameObject.transform.position.y < -2046)
+                Destroy(gameObject);
+        }
     }
 }

@@ -1,6 +1,9 @@
-﻿public enum PlatformType
+﻿namespace Platforms
 {
-    Pink,
-    Blue
+    public enum PlatformType
+    {
+        Pink,
+        Blue
+    }
 }
 

@@ -1,41 +1,44 @@
 ﻿using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdsManager : MonoBehaviour
+namespace Managers
 {
-
-    public void ShowRewardedAd()
+    public class AdsManager : MonoBehaviour
     {
-        
-        Debug.Log("Showing ad..");
-        if (Advertisement.IsReady("rewardedVideo"))
+
+        public void ShowRewardedAd()
         {
-            Debug.Log("Ad is ready!");
-            var options = new ShowOptions
+
+            Debug.Log("Showing ad..");
+            if (Advertisement.IsReady("rewardedVideo"))
             {
-                resultCallback = HandleShowResult
-            };
-            Advertisement.Show("rewardedVideo", options);
+                Debug.Log("Ad is ready!");
+                var options = new ShowOptions
+                {
+                    resultCallback = HandleShowResult
+                };
+                Advertisement.Show("rewardedVideo", options);
+            }
         }
-    }
 
-    private void HandleShowResult(ShowResult result)
-    {
-        Debug.Log("Handling ad results...");
-        switch (result)
+        private void HandleShowResult(ShowResult result)
         {
-            case ShowResult.Finished:
-                Debug.Log("Reborn");
-                ScoreManager.Instance.adWatched = true;
-                StartCoroutine(GameManager.Instance.WaitOneSec(2));
-                break;
-            case ShowResult.Skipped:
-                Debug.Log("No reward got! Video was skipped!");
-                break;
-            case ShowResult.Failed:
-                Debug.Log("No reward got! Video failed(");
-                break;
+            Debug.Log("Handling ad results...");
+            switch (result)
+            {
+                case ShowResult.Finished:
+                    Debug.Log("Reborn");
+                    ScoreManager.Instance.adWatched = true;
+                    StartCoroutine(GameManager.Instance.WaitOneSec(2));
+                    break;
+                case ShowResult.Skipped:
+                    Debug.Log("No reward got! Video was skipped!");
+                    break;
+                case ShowResult.Failed:
+                    Debug.Log("No reward got! Video failed(");
+                    break;
 
+            }
         }
     }
 }

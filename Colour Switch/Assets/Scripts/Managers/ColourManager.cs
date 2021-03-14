@@ -1,40 +1,46 @@
 ﻿using UnityEngine;
+using BackgroundScripts;
+using PlayerScripts;
+using Platforms;
 
-public class ColourManager : MonoBehaviour
+namespace Managers
 {
-    private static ColourManager _instance;
-    public static ColourManager Instance
+    public class ColourManager : MonoBehaviour
     {
-        get
+        private static ColourManager _instance;
+        public static ColourManager Instance
         {
-            if(_instance == null)
-                Debug.LogError("Colour Manager is null");
+            get
+            {
+                if (_instance == null)
+                    Debug.LogError("Colour Manager is null");
 
-            return _instance;
+                return _instance;
+            }
         }
-    }
 
-    [HideInInspector]
-    public PlatformType currentColor = PlatformType.Pink;
+        [HideInInspector]
+        public PlatformType currentColor = PlatformType.Pink;
 
-    public GameObject yellowPlatforms;
-    public GameObject bluePlatforms;
-    public Sprite yellowPlatform;
-    public Sprite bluePlatform;
-    public Background background;
+        public GameObject yellowPlatforms;
+        public GameObject bluePlatforms;
+        public Sprite yellowPlatform;
+        public Sprite bluePlatform;
+        public Background background;
 
-    private void Awake()
-    {
-        _instance = this;
-    }
+        private void Awake()
+        {
+            _instance = this;
+        }
 
-    public void SwitchBGColour()
-    {
-        if (currentColor == PlatformType.Pink)
-            currentColor = PlatformType.Blue;
-        else if (currentColor == PlatformType.Blue)
-            currentColor = PlatformType.Pink;
+        public void SwitchBGColour()
+        {
+            if (currentColor == PlatformType.Pink)
+                currentColor = PlatformType.Blue;
+            else if (currentColor == PlatformType.Blue)
+                currentColor = PlatformType.Pink;
 
-        background.SwitchColour();
+            background.SwitchColour();
+        }
     }
 }

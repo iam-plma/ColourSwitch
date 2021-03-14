@@ -1,34 +1,38 @@
 ﻿using UnityEngine;
+using Managers;
 
-public class BasicPlatform : Platform
+namespace Platforms
 {
-    private bool scoreClaimed = false;
-
-    public override void Start()
+    public class BasicPlatform : Platform
     {
-        
-    }
+        private bool scoreClaimed = false;
 
-    public override void Update()
-    {
-        
-    }
-
-    public override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
-
-        if(collision.gameObject.tag == "Player")
+        public override void Start()
         {
-            if (!scoreClaimed)
+
+        }
+
+        public override void Update()
+        {
+
+        }
+
+        public override void OnCollisionEnter2D(Collision2D collision)
+        {
+            base.OnCollisionEnter2D(collision);
+
+            if (collision.gameObject.tag == "Player")
             {
-                if (collision.relativeVelocity.y <= 0f)
+                if (!scoreClaimed)
                 {
-                    GameManager.Instance.UpdateScoreText();
-                    scoreClaimed = true;
-                    AudioManager.Instance.Play("BasicPlatform");
+                    if (collision.relativeVelocity.y <= 0f)
+                    {
+                        GameManager.Instance.UpdateScoreText();
+                        scoreClaimed = true;
+                        AudioManager.Instance.Play("BasicPlatform");
+                    }
+
                 }
-                    
             }
         }
     }
