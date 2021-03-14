@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
@@ -20,6 +17,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public Sound[] sounds;
+    public bool musicPlaying = true;
     public bool mainMusicPlaying = true;
     public bool secondaryMusicPlaying = true;
 
@@ -88,10 +86,12 @@ public class AudioManager : MonoBehaviour
             {
                 Stop("MainTheme");
                 mainMusicPlaying = false;
+                secondaryMusicPlaying = false;
             }else if (!mainMusicPlaying)
             {
                 Play("MainTheme");
                 mainMusicPlaying = true;
+                secondaryMusicPlaying = true;
             }
         }
         else if(SceneManager.GetActiveScene().buildIndex == 2)
@@ -100,11 +100,13 @@ public class AudioManager : MonoBehaviour
             {
                 Stop("MainTheme");
                 mainMusicPlaying = false;
+                secondaryMusicPlaying = false;
             }
             else if (!mainMusicPlaying)
             {
                 Play("MainTheme");
                 mainMusicPlaying = true;
+                secondaryMusicPlaying = true;
             }
         }
         else if (SceneManager.GetActiveScene().buildIndex == 3)
@@ -113,11 +115,13 @@ public class AudioManager : MonoBehaviour
             {
                 Stop("SecondaryTheme");
                 secondaryMusicPlaying = false;
+                mainMusicPlaying = false;
             }
             else if (!secondaryMusicPlaying)
             {
                 Play("SecondaryTheme");
                 secondaryMusicPlaying = true;
+                mainMusicPlaying = true;
             }
         }
     }

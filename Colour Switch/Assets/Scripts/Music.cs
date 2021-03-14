@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +13,6 @@ public class Music : MonoBehaviour
     [SerializeField]
     private Sprite musicOffWhite;
 
-    // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject.transform.parent);

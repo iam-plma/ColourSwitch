@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -55,7 +53,7 @@ public class Player : MonoBehaviour
     private void Movement()
     {
         //for pc
-        ///float horizontalinput = Input.GetAxisRaw("Horizontal");
+        //float horizontalinput = Input.GetAxisRaw("Horizontal");
         //rb.velocity = new Vector2(horizontalinput * speedForce/2, rb.velocity.y);
 
         //for mobile

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -49,11 +48,11 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("StartGame()");
+        
         AudioManager.Instance.Play("Switch");
         cameraAnim.SetTrigger("SetPosition");
         highScoreAnim.SetTrigger("SetPosition");
         tapToPlayAnim.SetTrigger("SetPosition");
-        
     }
      
     public void UpdateScoreText()
@@ -68,8 +67,15 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("high_score", ScoreManager.Instance.score);
         }
+
+        
         AudioManager.Instance.Stop("MainTheme");
-        AudioManager.Instance.Play("SecondaryTheme");
+        
+        if (AudioManager.Instance.secondaryMusicPlaying)
+        {
+            AudioManager.Instance.Play("SecondaryTheme");
+        }
+
         deathMenu.SetActive(true);  
         deathMenu.GetComponentInChildren<Text>().text = "Score: " + ScoreManager.Instance.score;
         highScore.text = "High Score: " + PlayerPrefs.GetInt("high_score", 0);
@@ -84,7 +90,10 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(1);
-        AudioManager.Instance.Play("MainTheme");
+        //Debug.Log("Music playing: " + AudioManager.Instance.mainMusicPlaying);
+
+        Debug.Log("Music playing: " + AudioManager.Instance.mainMusicPlaying);
+
         AudioManager.Instance.Play("Switch");
         AudioManager.Instance.Stop("SecondaryTheme");
     }
@@ -103,7 +112,18 @@ public class GameManager : MonoBehaviour
         
         SceneManager.LoadScene(scene);
         if (scene == 2)
-            AudioManager.Instance.Play("MainTheme");
+        {
+            AudioManager.Instance.Stop("SecondaryTheme");
+            if(AudioManager.Instance.secondaryMusicPlaying)
+            {
+                AudioManager.Instance.Play("MainTheme");
+                AudioManager.Instance.mainMusicPlaying = true;
+                AudioManager.Instance.secondaryMusicPlaying = false;
+            }
+
+            
+        }
+            
     }
 
     public void Reborn()
@@ -111,15 +131,13 @@ public class GameManager : MonoBehaviour
         if (ScoreManager.Instance.adWatched)
             return;
 
-        
-        
         AudioManager.Instance.Play("Switch");
         GameObject.FindGameObjectWithTag("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
 
         if (!ScoreManager.Instance.adWatched)
             return;
-
-        AudioManager.Instance.Stop("SecondaryTheme");
+        
+        
        
         //StartCoroutine(WaitOneSec(2));
     }
